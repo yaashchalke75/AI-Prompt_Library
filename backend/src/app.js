@@ -9,6 +9,9 @@ const env = require('./config/env');
 const promptRoutes = require('./routes/prompt.routes');
 const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 const { sendSuccess } = require('./utils/apiResponse');
+const allowedOrigins = env.CLIENT_ORIGIN
+  .split(',')
+  .map((origin) => origin.trim());
 
 const app = express();
 
@@ -18,7 +21,13 @@ app.use(helmet());
 // CORS - restricted to the configured frontend origin
 app.use(
   cors({
-    origin: env.CLIENT_ORIGIN,
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   })
 );
