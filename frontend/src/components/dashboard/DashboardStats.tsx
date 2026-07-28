@@ -1,5 +1,5 @@
-import { FileStack, FolderOpenDot, Star, Clock } from 'lucide-react';
-import { useAppSelector } from '@/app/hooks';
+import { FileStack, FolderOpenDot, Star, Clock } from "lucide-react";
+import { useAppSelector } from "@/app/hooks";
 
 const StatCard = ({
   icon,
@@ -28,8 +28,16 @@ export const DashboardStats = () => {
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-      <StatCard icon={<FileStack size={18} />} label="Total prompts" value={stats?.totalPrompts ?? 0} />
-      <StatCard icon={<Star size={18} />} label="Favorites" value={stats?.favoritePrompts ?? 0} />
+      <StatCard
+        icon={<FileStack size={18} />}
+        label="Total prompts"
+        value={stats?.totalPrompts ?? 0}
+      />
+      <StatCard
+        icon={<Star size={18} />}
+        label="Favorites"
+        value={stats?.favoritePrompts ?? 0}
+      />
       <StatCard
         icon={<FolderOpenDot size={18} />}
         label="Categories in use"

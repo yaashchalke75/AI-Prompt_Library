@@ -1,11 +1,13 @@
-import { Menu, Moon, Sparkles, Sun } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { toggleTheme } from '@/features/theme/themeSlice';
-import { toggleSidebar } from '@/features/ui/uiSlice';
+import { Menu, Moon, Sparkles, Sun } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { toggleTheme } from "@/features/theme/themeSlice";
+import { toggleSidebar } from "@/features/ui/uiSlice";
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
   const mode = useAppSelector((state) => state.theme.mode);
+
+  console.log("Navbar mode:", mode);
 
   return (
     <header className="sticky top-0 z-30 h-16 border-b border-ink-100 dark:border-ink-800 bg-paper-50/90 dark:bg-ink-950/90 backdrop-blur-sm">
@@ -33,10 +35,12 @@ export const Navbar = () => {
         <button
           type="button"
           onClick={() => dispatch(toggleTheme())}
-          aria-label={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          aria-label={
+            mode === "dark" ? "Switch to light mode" : "Switch to dark mode"
+          }
           className="p-2.5 rounded-lg text-ink-600 dark:text-ink-300 hover:bg-ink-100 dark:hover:bg-ink-800 transition-colors"
         >
-          {mode === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          {mode === "dark" ? <Sun size={18} /> : <Moon size={18} />}
         </button>
       </div>
     </header>
