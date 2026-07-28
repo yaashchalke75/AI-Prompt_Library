@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  /* --- Color tokens ---
+     Base: deep ink/graphite (not pure black) for a focused, editor-like feel.
+     Accent: warm amber-gold — signals "saved/valuable" without reading as
+     the common terracotta AI-tell or a neon-on-black default.
+     Category colors are desaturated, functional tags — not decoration. */
+  --color-ink-950: #0f1115;
+  --color-ink-900: #15181f;
+  --color-ink-800: #1c2029;
+  --color-ink-700: #262b36;
+  --color-ink-600: #343b49;
+  --color-ink-500: #4a5263;
+  --color-ink-400: #6b7385;
+  --color-ink-300: #9aa2b2;
+  --color-ink-200: #c4c9d4;
+  --color-ink-100: #e4e7ed;
+  --color-ink-50: #f5f6f8;
+
+  --color-paper-50: #fbfaf7;
+  --color-paper-100: #f4f2ec;
+  --color-paper-200: #e9e6db;
+
+  --color-amber-600: #b8853a;
+  --color-amber-500: #d19c4a;
+  --color-amber-400: #e0b56d;
+  --color-amber-100: #f7ead1;
+
+  --color-signal-danger: #d1554a;
+  --color-signal-danger-soft: #f3d9d6;
+  --color-signal-success: #4a8a6f;
+
+  --font-display: "Fraunces", "ui-serif", "Georgia", serif;
+  --font-sans: "Inter", "ui-sans-serif", "system-ui", sans-serif;
+  --font-mono: "IBM Plex Mono", "ui-monospace", "SFMono-Regular", monospace;
+
+  --shadow-card: 0 1px 2px rgba(15, 17, 21, 0.06), 0 4px 12px rgba(15, 17, 21, 0.04);
+  --shadow-card-hover: 0 2px 4px rgba(15, 17, 21, 0.08), 0 8px 24px rgba(15, 17, 21, 0.08);
+  --shadow-modal: 0 8px 16px rgba(15, 17, 21, 0.12), 0 24px 48px rgba(15, 17, 21, 0.18);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-paper-50 text-ink-900 font-sans;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.dark body {
+    @apply bg-ink-950 text-ink-100;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-amber-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-amber-100);
+  }
+
+  html.dark ::selection {
+    background: var(--color-amber-600);
+    color: var(--color-ink-950);
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ink-400) transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
