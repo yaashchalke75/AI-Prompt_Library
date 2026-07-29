@@ -5,12 +5,18 @@ const { connectDB, disconnectDB } = require('./config/db');
 let server;
 
 const start = async () => {
-  await connectDB();
+  try {
+    await connectDB();
 
-  server = app.listen(env.PORT, () => {
-    // eslint-disable-next-line no-console
-    console.log(`[server] AI Prompt Library API running on port ${env.PORT} (${env.NODE_ENV})`);
-  });
+    server = app.listen(env.PORT, () => {
+      console.log(
+        `[server] AI Prompt Library API running on port ${env.PORT} (${env.NODE_ENV})`
+      );
+    });
+  } catch (err) {
+    console.error('[server] Failed to start:', err);
+    process.exit(1);
+  }
 };
 
 const shutdown = async (signal) => {

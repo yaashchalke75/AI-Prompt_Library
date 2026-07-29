@@ -32,8 +32,11 @@ const connectDB = async () => {
     mongoose.set('strictQuery', true);
 
     await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 10000,
-    });
+  serverSelectionTimeoutMS: 10000,
+  maxPoolSize: 10,
+  minPoolSize: 2,
+  socketTimeoutMS: 45000,
+});
 
     // eslint-disable-next-line no-console
     console.log(`[db] MongoDB connected: ${mongoose.connection.host}`);

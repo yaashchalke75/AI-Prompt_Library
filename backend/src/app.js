@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
+const mongoose = require('mongoose');
 
 const env = require('./config/env');
 const promptRoutes = require('./routes/prompt.routes');
@@ -57,7 +58,21 @@ app.use(
 );
 
 // Health check
-app.get('/api/health', (req, res) => sendSuccess(res, { data: { status: 'ok' }, message: 'API is healthy' }));
+const mongoose = require('mongoose');
+
+// Health check
+app.get('/api/health', (req, res) => {
+  sendSuccess(res, {
+    message: 'API is healthy',
+    data: {
+      status: 'ok',
+      database:
+        mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+      uptime: process.uptime(),
+      timestamp: new Date().toISOString(),
+    },
+  });
+});
 
 // Routes
 app.use('/api', promptRoutes);
