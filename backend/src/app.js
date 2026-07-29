@@ -58,7 +58,7 @@ app.use(
 );
 
 // Health check
-const mongoose = require('mongoose');
+
 
 // Health check
 app.get('/api/health', (req, res) => {
